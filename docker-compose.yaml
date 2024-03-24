@@ -1,0 +1,23 @@
+version: '3.8'
+services:
+  express_starter:
+    container_name: spring-boot-app
+    image: isoroka/spring-boot-github-action-demo:latest
+    restart: always
+    environment:
+      - PORT=8080
+    expose:
+      - 8080
+    ports:
+      - 8080:8080
+  watchtower:
+    container_name: watchtower
+    image: containrrr/watchtower
+    environment:
+      - WATCHTOWER_CLEANUP=true
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    command: --interval 30 spring-boot-app
+networks:
+  express_nw:
+    driver: bridge
