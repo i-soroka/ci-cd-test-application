@@ -13,4 +13,9 @@ public class RestEndpoint {
         return "OK";
     }
 
+    @GetMapping("/test")
+    public String test() {
+        return "TEST";
+    }
+
 }
